@@ -1,0 +1,66 @@
+%% ERD for UNWFP projects and donations
+
+erDiagram
+    COUNTRIES {
+        int CountryID PK
+        string Name
+        string Region
+        int Population
+    }
+    PROJECTS {
+        int ProjectID PK
+        int CountryID FK
+        string Name
+        string Description
+        date StartDate
+        date EndDate
+    }
+    PARTNERS {
+        int PartnerID PK
+        int CountryID FK
+        string Name
+        string ContactInfo
+    }
+    EVENTS {
+        int EventID PK
+        int CountryID FK
+        string Name
+        string Description
+        date Date
+        string Location
+    }
+    VOLUNTEERS {
+        int VolunteerID PK
+        int CountryID FK
+        string Name
+        string Role
+    }
+    EMERGENCYCOUNTRIES {
+        int EmergencyCountryID PK
+        int CountryID FK
+        string EmergencyType
+        string Description
+        date StartDate
+        date EndDate
+    }
+    OURWORK {
+        int OurWorkID PK
+        int CountryID FK
+        string FocusArea
+        string Description
+        string Impact
+    }
+    DONATIONS {
+        int DonationID PK
+        int ProjectID FK
+        float Amount
+        date Date
+    }
+ 
+    COUNTRIES ||--o{ PROJECTS : "has"
+    COUNTRIES ||--o{ PARTNERS : "has"
+    COUNTRIES ||--o{ EVENTS : "hosts"
+    COUNTRIES ||--o{ VOLUNTEERS : "has"
+    COUNTRIES ||--o{ EMERGENCYCOUNTRIES : "includes"
+    COUNTRIES ||--o{ OURWORK : "includes"
+    PROJECTS ||--o{ DONATIONS : "receives"

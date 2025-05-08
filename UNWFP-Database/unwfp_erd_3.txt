@@ -1,0 +1,67 @@
+%% ERD for UNWFP projects and donations
+%%ChatGPT directives
+%%Please design me an ERD entity relationship diagram based on this website information https://www.wfp.org/countries
+%%Please help me to design a basic data model
+%%Please generate the above data model with Mermaid code
+%%Mermaid code：
+
+erDiagram
+    COUNTRY {
+        int country_id PK
+        string country_name
+        string region
+        int population
+        float poverty_level
+        float malnutrition_rate
+    }
+    
+    STRATEGIC_PLAN {
+        int plan_id PK
+        int country_id FK
+        date start_date
+        date end_date
+        string focus_areas
+        string partners
+    }
+    
+    HUMANITARIAN_ASSISTANCE {
+        int assistance_id PK
+        int country_id FK
+        string assistance_type
+        float quantity
+        int beneficiary_count
+        date start_date
+        date end_date
+    }
+
+    BENEFICIARY {
+        int beneficiary_id PK
+        int household_id
+        int age
+        string gender
+        string aid_received
+        string vulnerability_level
+    }
+
+    PARTNER_ORGANIZATION {
+        int partner_id PK
+        string organization_name
+        string partnership_type
+        string contact_details
+    }
+
+    SUPPLY_CHAIN {
+        int supply_chain_id PK
+        int country_id FK
+        string resource_type
+        string transport_mode
+        float cost
+        int delivery_time
+    }
+    
+    COUNTRY ||--o{ STRATEGIC_PLAN: "has"
+    COUNTRY ||--o{ HUMANITARIAN_ASSISTANCE: "receives"
+    STRATEGIC_PLAN ||--o{ PARTNER_ORGANIZATION: "involves"
+    HUMANITARIAN_ASSISTANCE ||--o{ BENEFICIARY: "supports"
+    HUMANITARIAN_ASSISTANCE ||--|| SUPPLY_CHAIN: "uses"
+

@@ -1,0 +1,73 @@
+%% ERD for UNWFP projects and donations
+erDiagram
+    %% Define Countries table
+    Countries {
+        INT CountryID PK ""
+        VARCHAR(50) CountryName ""
+        VARCHAR(10) CountryCode "ISO country code"
+        TEXT Overview "Allowed to be null"
+        INT RegionID FK ""
+    }
+
+    %% Define Regions table
+    Regions {
+        INT RegionID PK 
+        VARCHAR(50) RegionName 
+        TEXT Description 
+    }
+
+    %% Define Projects table
+    Projects {
+        INT ProjectID PK ""
+        INT CountryID FK ""
+        INT DonorID FK ""
+        VARCHAR ProjectName ""
+        TEXT Description ""
+        DATE StartDate ""
+        DATE EndDate "Allowed to be null"
+        INT ProjectStatusID FK ""
+    }
+
+    %% Define Contacts table
+    Contacts {
+        INT ContactID PK ""
+        INT CountryID FK ""
+        VARCHAR Office ""
+        VARCHAR(20) Phone "Allowed to be null" 
+        VARCHAR(20) Fax "Allowed to be null"
+        VARCHAR Email "Allowed to be null"
+    }
+
+    %% Define Situation_Statistics table
+    Situation_Statistics {
+        INT Situation_StatisticID PK ""
+        INT CountryID FK ""
+        INT Year "The time at the time of the statistics"
+        INT Population "Allowed to be null"
+        INT FoodNeed "Allowed to be null"
+        TEXT Achievement "Allowed to be null"
+    }
+
+    %% Define Donors table
+    Donors {
+        INT DonorID PK ""
+        VARCHAR DonorName ""
+        VARCHAR(10) DonorType "G for Government; P for private organizations"
+        TEXT Description "Allowed to be null"
+    }
+
+    %% Define ProjectStatus table
+    ProjectStatus {
+        INT ProjectStatusID PK ""
+        VARCHAR(10) StatusName "O for Ongoing, F for Finished, P for Paused"
+        TEXT Description "Allowed to be null"
+    }
+
+    %% Define relationships between different tables
+    Regions ||--o{ Countries : "Contain"
+    Countries ||--o{ Projects : "Carrie out"
+    Countries ||--o{ Contacts : "Contacts"
+    Countries ||--o{ Situation_Statistics : "Have"
+    Donors ||--o{ Projects : "Support"
+    Projects ||--|| ProjectStatus : ""
+ 
