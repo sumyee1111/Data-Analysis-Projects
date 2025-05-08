@@ -3,4 +3,4 @@ Showcasing data analytics projects completed during my MSc in Information System
 # Projects
 - [UNWFP Database Design](UNWFP-Database/): Designed database for UNWFP, tracked 10+ country projects, reduced redundancy by 30%.
 - [Airline Fare Analysis](Airline-Pricing/): analysed fare data and constructed regression model (R² = 0.92).
-- [Student-Performance analysis] (Student Performance/): predicts maths performance (R² = 0.18).
+- [Student Performance analysis] (Student-Performance/): predicts maths performance (R² = 0.18).
